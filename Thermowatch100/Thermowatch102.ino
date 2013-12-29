@@ -12,6 +12,12 @@ const int led2 = 9;     // Neutral LED
 const int led3 = 10;
 const int led4 = 11;     // Warmest LED
 
+const int led0_highend = 255;   //High end trim of each LED
+const int led1_highend = 255; 
+const int led2_highend = 255; 
+const int led3_highend = 255; 
+const int led4_highend = 255; 
+
 const int btndown = 7;  // Down button
 const int btnmid = 8;   // Neutral button
 const int btnup = 12;    // Up button
@@ -128,38 +134,38 @@ void loop() {
   // Update LED values    
   if (peltier == 1) {
    // Hot direction
-     led2_value = 255;
+     led2_value = 60;
      led0_value = 0;
      led1_value = 0;
      
      if (strength > 127) {
-       led3_value = 255; 
-       led4_value = (strength - 128)*2;
+       led3_value = led3_highend; 
+       led4_value = (strength - 128)*2 * led4_highend/255;
      }
      else {
-       led3_value = strength * 2;
+       led3_value = strength * 2 * led3_highend/255;
        led4_value = 0;
      }
   }
   else if (peltier == -1){
     // Cold direction
-     led2_value = 255;
+     led2_value = 60;
      led3_value = 0;
      led4_value = 0;
      
      if (strength > 127) {
-       led1_value = 255; 
-       led0_value = (strength - 128)*2;
+       led1_value = led1_highend; 
+       led0_value = (strength - 128)*2 * led0_highend/255;
      }
      else {
-       led1_value = strength * 2;
+       led1_value = strength * 2 * led1_highend/255;
        led0_value = 0;
      }
   }
   else {
     led0_value = 0;
     led1_value = 0;
-    led2_value = 125;
+    led2_value = 15;
     led3_value = 0;
     led4_value = 0;    
   }
